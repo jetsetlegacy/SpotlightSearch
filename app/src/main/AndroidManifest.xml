@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.mac.spotlight">
+    <permission
+        android:name="au.com.example.READ_CONTENT"
+        >
+    </permission>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="com.android.browser.permission.READ_HISTORY_BOOKMARKS"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/kkk"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+
+        android:theme="@style/AppTheme">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN"
+                android:icon="@drawable/kkk"/>
+
+            <category android:name="android.intent.category.LAUNCHER"
+                android:icon="@drawable/kkk"/>
+            <!-- <category android:name="android.intent.category.HOME"/> -->
+            <!-- <category android:name="android.intent.category.DEFAULT"/> -->
+        </intent-filter>
+        <intent-filter>
+            <action android:name="android.intent.action.SEARCH_LONG_PRESS"
+                android:icon="@drawable/kkk"/>
+            <category android:name="android.intent.category.DEFAULT"
+                android:icon="@drawable/kkk"/>
+        </intent-filter>
+        <intent-filter>
+            <action android:name="android.intent.action.ASSIST"
+                android:icon="@drawable/kkk"/>
+            <category android:name="android.intent.category.DEFAULT"
+                android:icon="@drawable/kkk"/>
+        </intent-filter>
+
+
+    <provider android:name=".apps.AppProvider"
+        android:authorities="spotlight"
+        android:grantUriPermissions="true"
+        android:multiprocess="false"
+      />
+    <service android:name=".apps.AppSyncer"
+        />
+    <receiver android:name =".apps.AppSyncStateManager"
+      >
+        <intent-filter>
+            <action android:name="android.intent.action.PACKAGE_ADDED"/>
+            <action android:name="android.intent.action.PACKAGE_CHANGED"/>
+            <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+            <action android:name="android.intent.action.LOCALE_CHANGED"/>
+            <data android:scheme="package"
+                />
+        </intent-filter>
+    </receiver>
+    <provider android:name=".favoriteitems.FavoriteItemsProvider"
+        android:grantUriPermissions="true"
+        android:exported="true"
+        android:enabled="true"
+        android:authorities="spotlight.minor.spotlight.favoriteitems.FavoriteItemsProvider"
+        android:multiprocess="false"/>
+
+        <meta-data
+            android:name="com.google.android.awareness.API_KEY"
+            android:value="AIzaSyDYMRDZwKLXtatpZW-M-k3H9IZXndkRh3Y" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCbJ3qGAgve5mUvu-rn_9MExS-lj6xByo8" />
+        <meta-data
+            android:name="com.google.android.nearby.messages.API_KEY"
+            android:value="AIzaSyCbJ3qGAgve5mUvu-rn_9MExS-lj6xByo8" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- We'll need to add two entries to our manifest for our collection view widget -->
+
+        <!-- 1. The broadcast receiver that refers to our widget. This needs the
+                intent-filter android.appwidget.action.APPWIDGET_UPDATE and the
+                meta-data for our XML widget configuration -->
+        <receiver android:name=".CollectionWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/collection_widget_info" />
+        </receiver>
+
+        <!-- 2. The service that will send our collection data to our widget. It needs the
+                permission android.permission.BIND_REMOTEVIEWS -->
+        <service android:name=".WidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+
+
+    </application>
+
+</manifest>

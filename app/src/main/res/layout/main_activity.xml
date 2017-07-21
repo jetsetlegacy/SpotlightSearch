@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingTop="4dip"
+    android:paddingLeft="4dip"
+    android:paddingRight="4dip"
+	android:background="#FFFFFF">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <FrameLayout
+        	android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:measureAllChildren="true">
+		    <EditText
+				android:id = "@+id/searchText"
+                android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+                android:imeOptions="actionGo"
+				android:layout_gravity="center_vertical"
+                android:selectAllOnFocus="true"
+                android:hapticFeedbackEnabled="true"
+                android:textColor="@android:color/background_dark"
+                android:singleLine="true"
+                android:cursorVisible="true"
+                android:autoText="true" />
+			<LinearLayout
+			    android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+			    android:layout_gravity="right|center_vertical"
+			    android:layout_marginRight="10dip">
+<!--			    <ImageButton android:id="@+id/speechRecognizer"
+			    	android:src="@drawable/speech_recognizer"
+				    android:layout_width="32dip"
+					android:layout_height="wrap_content"
+					android:visibility="invisible"
+					android:clickable="false"
+					android:background="@drawable/transparent_background_image"/> -->
+                <!--			android:drawableRight="@drawable/clear_search_text" android:src="@drawable/clear_search_text" -->
+
+                <ImageButton android:id="@+id/clearSearchText"
+                    android:src="@drawable/places_ic_clear"
+					android:layout_width="32dip"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="4dip"
+				    android:visibility="gone" />
+			</LinearLayout>
+		</FrameLayout>
+    </LinearLayout>
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+
+		<ListView android:id="@android:id/list"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:drawSelectorOnTop="false"
+		    android:headerDividersEnabled="false"
+		    android:footerDividersEnabled="false"/>
+		<TextView android:id="@+id/noSuggestions"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+            android:textColor="@android:color/background_dark" />
+	</LinearLayout>
+</LinearLayout>
